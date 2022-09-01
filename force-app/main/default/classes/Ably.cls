@@ -5,16 +5,7 @@
 public class Ably {
 
     private static final String PUBLISH_ENDPOINT = 'https://rest.ably.io';
-    private static final String ABLY_API_KEY = 'MTlutQ.4vE-1Q:3wiJ0mSpgqvXzmY_DvnXtF-bzcWmdCdsHO48Bit3Dr8';
-
-    @AuraEnabled(cacheable=true)
-    public static string getAblyApiKey(){
-        try {
-            return ABLY_API_KEY;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-    }
+    private static final String ABLY_API_KEY = Ably_Key__mdt.getInstance('Master').Key__c;
 
     /**
      * @name publishMessage

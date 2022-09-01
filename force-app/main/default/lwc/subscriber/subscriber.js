@@ -1,6 +1,5 @@
 import { LightningElement, wire } from 'lwc';
 import { subscribe, unsubscribe, onError, setDebugFlag, isEmpEnabled } from 'lightning/empApi';
-import getAblyApiKey from '@salesforce/apex/Ably.getAblyApiKey';
 
 export default class Subscriber extends LightningElement {
     ablyStreamingEndpoint = 'https://realtime.ably.io/sse';
@@ -11,8 +10,6 @@ export default class Subscriber extends LightningElement {
 
     message; // this is the event message of the most recent event
     time; // this is the time of the most recent event
-
-    @wire(getAblyApiKey) ablyApiKey;
 
     connectedCallback() {
         this.subscribe();
