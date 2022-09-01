@@ -1,0 +1,41 @@
+<template>
+    <lightning-card title="Ably Publisher" icon-name="utility:connected_apps">
+        <lightning-button label="Publish" slot="actions" onclick={handleClick}></lightning-button>
+        <div class="slds-p-around_small">
+            <div>
+                <!-- Ably Channel Name restrictions: https://faqs.ably.com/what-restrictions-are-there-on-channel-names -->
+                <lightning-input 
+                    id="channel-input"
+                    class="validate"
+                    type="text" 
+                    label="Channel" 
+                    placeholder="enter-channel-name-here..."
+                    field-level-help="Channel name may only contain alphanumeric characters and dashes (-)"
+                    pattern="^\S+$"
+                    message-when-pattern-mismatch="Channel name may only contain alphanumeric characters and dashes (-)"
+                    max-length="200"
+                    message-when-too-long="Channel name must be less than 200 characters"
+                    variant="label-inline"
+                    onchange={handleChannelChange}
+                    required
+                ></lightning-input>
+            </div>
+            <div>
+                <!-- Ably Channel Name restrictions: https://faqs.ably.com/what-is-the-maximum-message-size -->
+                <lightning-input 
+                    id="message-input"
+                    class="validate"
+                    type="text" 
+                    label="Message" 
+                    placeholder="enter message here..."
+                    field-level-help="Limit message to 255 characters"
+                    max-length="255"
+                    message-when-too-long="Channel name must be less than 255 characters"
+                    variant="label-inline"
+                    onchange={handleMessageChange}
+                    required
+                ></lightning-input>
+            </div>
+        </div>
+    </lightning-card>
+</template>

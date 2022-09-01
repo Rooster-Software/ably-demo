@@ -1,0 +1,52 @@
+<template>
+    <lightning-card title="Ably Subscriber" icon-name="utility:alert">
+        <div slot="actions">
+            <template if:true={subscribed}><div style="color:darkgreen">Subscribed to {channel}</div></template>
+            <template if:false={subscribed}><div style="color:#ba0517;">Unsubscribed</div></template>
+        </div>
+
+        <!-- body -->
+        <div class="slds-p-around_small">
+            <!-- allow user to subscribe to channel -->
+            <lightning-layout vertical-align="start" horizontal-align="space" multiple-rows>
+                <lightning-layout-item padding="horizontal-small" flexibility="grow">
+                    <lightning-input 
+                        id="channel-input"
+                        type="text" 
+                        placeholder="enter-channel-name-here..."
+                        pattern="^\S+$"
+                        message-when-pattern-mismatch="Channel name may only contain alphanumeric characters and dashes (-)"
+                        max-length="200"
+                        message-when-too-long="Channel name must be less than 200 characters"
+                        variant="label-hidden"
+                        required
+                    ></lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item padding="horizontal-small">
+                    <lightning-button label="Subscribe" onclick={handleSubscribe}></lightning-button>
+                </lightning-button></lightning-layout-item>
+            </lightning-layout>
+
+            <!-- show messages received by channel -->
+            <div class="slds-p-vertical_large slds-p-horizontal_xx-large lgc-bg">
+                <lightning-tile label="Event Details" type="media">
+                    <lightning-icon slot="media" icon-name="standard:news"></lightning-icon>
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">
+                            <p class="slds-truncate" title="Message">Message:</p>
+                        </dt>
+                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                            <p class="slds-truncate" title={message}>{message}</p>
+                        </dd>
+                        <dt class="slds-dl_horizontal__label">
+                            <p class="slds-truncate" title="Time">Time:</p>
+                        </dt>
+                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                            <p class="slds-truncate" title={time}>{time}</p>
+                        </dd>
+                    </dl>
+                </lightning-tile>
+            </div>
+        </div>
+    </lightning-card>    
+</template>
