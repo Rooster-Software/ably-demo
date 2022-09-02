@@ -14,6 +14,8 @@ The _publisher_ LWC allows a user to send a simple text message to a specified c
 
 The _subscriber_ LWC allows a user to subscribe to a channel. Whenever a message is published to the subscribed channel in Ably, the subscriber shows the most recent message's details in the UI. In Ably, a Webhook is defined to send a notification to the _AblyRestResource_ Apex REST Resource whenever a message is published to any channel. The _AblyRestResource_ class, upon receipt of a request, creates an _Ably_Event__e_ Platform Event. Finally, the _subscriber_ LWC works by actually listening for _Ably_Event__e_ Platform Events and then only showing messages sent to the specified Ably channel.
 
+The _AblyRestResource_ is made accessible to the Ably Webhook service through a Public Site. There is a nice demo of how to set up a Site and Webhook integration into Salesforce here: [Salesforce Integration using Webhooks](https://www.apexhours.com/salesforce-integration-using-webhooks/)
+
 ### Repo components
 
 - Apex
