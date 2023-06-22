@@ -6,7 +6,7 @@ global class AblyRestResource {
      * @description handle posting of webhook event from Ably indicating a new event being created
      */
     @HttpPost
-    global static String doPost() {
+    global static void doPost() {
         RestRequest req = RestContext.request;
         RestResponse response = RestContext.response;
         String requestBody = req.requestBody.toString();
@@ -53,7 +53,9 @@ global class AblyRestResource {
             }
 
             response.statusCode = 201; // indicate successful creation of platform events
-            return 'success';
+            response.responseBody = Blob.valueOf('success');
+
+            //return 'success';
         } catch (Exception e) {
             // handle error scenario
             Map<String,String> errorResponse = new Map<String,String>();
@@ -63,7 +65,7 @@ global class AblyRestResource {
             response.statusCode = 500;
             response.responseBody = Blob.valueOf(errorResponseJson);
             
-            return 'error';
+            //return 'error';
         }
     }
 }
