@@ -1,3 +1,7 @@
+/**
+ * @name AblyRestResource
+ * @description class for receiving and reacting to outgoing webhook events from Ably
+ */
 @RestResource(urlMapping='/Ably/*')
 global class AblyRestResource {
     
