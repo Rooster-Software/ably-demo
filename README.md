@@ -2,6 +2,8 @@
 
 Created a simple project that integrates Salesforce with Ably. 
 
+![](ably-demo.gif)
+
 ## What is Ably?
 
 [Ably](https://ably.com/) is a third party pub/sub system allowing clients to create event channels and then publish to those channels and/or subscribe to those channels. The value add is that the Ably platform allows discrete systems to be connected and responsive to one another through a pub/sub, event-driven architecture without requiring clients to set up dedicated pub/sub systems or integrations. Ably offers [APIs and SDKs for developers](https://ably.com/docs) to get apps up and running quickly.
@@ -24,3 +26,32 @@ The _AblyRestResource_ is made accessible to the Ably Webhook service through a 
 - LWC
     - *publisher* - this LWC allows a user to send a message to a specified channel. The LWC invokes an Apex method to make a REST API call to Ably to publish the message.
     - *subscriber* - this LWC allows a user to subscribe to an Ably channel. It operates by listening for Ably_Event__e Platform Events and then only paying attention to events on the appropriate Ably channel.
+
+## Ably Configuration
+
+This implementation relies on an outgoing Ably Webhook to send a notification to the Salesforce Org's Ably Rest Resource (defined by the *AblyRestResource* Apex Class). 
+
+The outgoing Webhook is defined in the Ably Dashboard within the Ably app being used in the project or implementation. To create and manage webhook events for your Ably app
+
+1. Navigate to the [Ably Dashboard](ably.com/login)
+2. Click on the relevant app
+3. Click on the *Integrations* tab
+4. See *Integration Rules* - Integration Rules are used to push/stream data to webhooks, queues, or streams whenever an Ably Event is registered.
+
+To set up an outgoing webhook, 
+
+1. Click *New Integration Rule*
+2. Choose *Webhook*
+3. Choose *Webhook* again to send a webhook event to a custom (Salesforce) endpoint
+4. Enter the endpoint of your Apex Rest Resource in the URL field
+5. Set *Headers* to "Content-Type:application/json"
+6. Set *Encoding* to JSON
+
+## Notes
+
+- LWC tests for components in this repo have not been developed
+- We recommend reviewing Apex Test Classes and adding test cases for your specific implementation
+
+## Resources
+
+- [Ably Docs](https://ably.com/docs)
