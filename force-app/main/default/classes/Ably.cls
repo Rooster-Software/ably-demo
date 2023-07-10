@@ -22,6 +22,7 @@ public class Ably {
 
             request.setMethod('POST');
             request.setHeader('Content-Type', 'application/json');
+            request.setHeader('Accept', 'application/json'); // indicate that the response body should be in applicatin/json format
             request.setHeader('Authorization', 'Basic ' + EncodingUtil.base64Encode(Blob.valueOf(ABLY_API_KEY)));
             
             Map<String,Object> payload = new Map<String,Object>();
@@ -40,8 +41,8 @@ public class Ably {
             if (response.getStatus() != 'Created') { // handle unsuccessful response
                 messageId = 'error';
             } else {
-                String body = response.getBody();
-                messageId = body.substringAfter('messageId:</td><td class="gen-property-value"><span class="gen-primitive-string">').substringBefore('<');
+                Map<String,Object> responseMap = (Map<String,Object>) JSON.deserializeUntyped(response.getBody());
+                messageId = String.valueOf(responseMap.get('messageId'));
             }
 
             System.debug('messageId: ' + messageId);
